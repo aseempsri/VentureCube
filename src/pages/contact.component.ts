@@ -30,14 +30,14 @@ import { ToastService } from '../services/toast.service';
       <!-- Contact Info Cards -->
       <section class="py-20">
         <div class="container mx-auto px-4">
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <app-card *ngFor="let info of contactInfo" className="p-6 text-center hover:shadow-elegant transition-all group border-2 hover:border-primary">
-              <div [class]="'w-16 h-16 rounded-2xl bg-gradient-to-br ' + info.color + ' flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform'">
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <app-card *ngFor="let info of contactInfo" className="p-8 text-center hover:shadow-elegant transition-all group border-2 hover:border-primary h-full flex flex-col items-center justify-start">
+              <div [class]="'w-16 h-16 rounded-2xl bg-gradient-to-br ' + info.color + ' flex items-center justify-center text-white mx-auto mb-6 group-hover:scale-110 transition-transform flex-shrink-0'">
                 <app-icon [name]="info.icon" [size]="24"></app-icon>
               </div>
-              <h3 class="text-lg font-bold mb-2">{{ info.title }}</h3>
-              <div class="space-y-1">
-                <p *ngFor="let detail of info.details" class="text-sm text-muted-foreground">
+              <h3 class="text-lg font-bold mb-4 flex-shrink-0">{{ info.title }}</h3>
+              <div class="space-y-2 flex-grow flex flex-col justify-center">
+                <p *ngFor="let detail of info.details" class="text-sm text-muted-foreground leading-relaxed">
                   {{ detail }}
                 </p>
               </div>
