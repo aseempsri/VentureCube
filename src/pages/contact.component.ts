@@ -12,6 +12,24 @@ import { ToastService } from '../services/toast.service';
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, FormsModule, ButtonComponent, CardComponent, InputComponent, TextareaComponent, IconComponent],
+  styles: [`
+    @media (min-width: 1024px) {
+      .equal-height-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      
+      .card-column {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .card-column > app-card:first-child {
+        flex: 1;
+      }
+    }
+  `],
   template: `
     <div class="min-h-screen pt-20">
       <!-- Hero Section -->
@@ -46,9 +64,9 @@ import { ToastService } from '../services/toast.service';
 
           <div class="grid lg:grid-cols-2 gap-12">
             <!-- Left Column: Form and Consultation Card -->
-            <div class="space-y-6">
+            <div class="space-y-6 flex flex-col card-column">
               <!-- Contact Form -->
-              <app-card className="p-8 shadow-elegant border-2">
+              <app-card className="p-8 shadow-elegant border-2 equal-height-card" id="message-card">
                 <h2 class="text-3xl font-bold mb-6">Send us a Message</h2>
                 <form (ngSubmit)="handleSubmit($event)" class="space-y-6">
                   <div>
@@ -77,7 +95,7 @@ import { ToastService } from '../services/toast.service';
                     <app-textarea name="message" [(ngModel)]="formData.message" placeholder="Tell us more about your financial goals..." [rows]="6" [required]="true" className="border-2"></app-textarea>
                   </div>
 
-                  <app-button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant">
+                  <app-button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant mt-4">
                     Send Message
                     <app-icon name="send" [size]="16" class="ml-2"></app-icon>
                   </app-button>
@@ -85,7 +103,7 @@ import { ToastService } from '../services/toast.service';
               </app-card>
 
               <!-- Schedule a Free Consultation Card -->
-              <app-card className="p-8 bg-gradient-to-br from-primary via-secondary to-accent border-2 border-primary shadow-elegant">
+              <app-card className="p-8 bg-gradient-to-br from-primary via-secondary to-accent border-2 border-primary shadow-elegant mt-8">
                 <h3 class="text-2xl font-bold text-white mb-4">
                   Schedule a Free Consultation
                 </h3>
@@ -100,13 +118,13 @@ import { ToastService } from '../services/toast.service';
             </div>
 
             <!-- Right Column: Map & Additional Info -->
-            <div class="space-y-6">
-              <app-card className="p-8 border-2">
+            <div class="space-y-6 flex flex-col card-column">
+              <app-card className="p-8 border-2 equal-height-card" id="office-card">
                 <h2 class="text-3xl font-bold mb-6">Visit Our Office</h2>
-                <div class="aspect-video bg-muted rounded-lg mb-6 flex items-center justify-center">
+                <div class="aspect-video bg-muted rounded-lg mb-6 flex items-center justify-center flex-shrink-0">
                   <app-icon name="map-pin" [size]="64" class="text-muted-foreground"></app-icon>
                 </div>
-                <div class="space-y-4">
+                <div class="space-y-4 flex-grow">
                   <div class="flex items-start gap-3">
                     <app-icon name="map-pin" [size]="20" class="text-primary flex-shrink-0 mt-1"></app-icon>
                     <div>
@@ -121,7 +139,7 @@ import { ToastService } from '../services/toast.service';
                 </div>
               </app-card>
 
-              <app-card className="p-8 border-2">
+              <app-card className="p-8 border-2 mt-8">
                 <h3 class="text-xl font-bold mb-4">Why Choose Venture Cube?</h3>
                 <ul class="space-y-3">
                   <li *ngFor="let item of whyChooseItems" class="flex items-center gap-2">
@@ -186,7 +204,7 @@ export class ContactComponent {
     { q: 'What is the minimum investment amount?', a: 'You can start investing with as little as ₹500 per month through our SIP plans. There\'s no minimum amount to begin your financial journey with us.' },
   ];
 
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService) { }
 
   handleSubmit(event: Event) {
     event.preventDefault();
