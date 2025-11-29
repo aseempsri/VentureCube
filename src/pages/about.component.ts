@@ -94,21 +94,33 @@ import { IconComponent } from '../components/ui/icon.component';
           </div>
 
           <div class="relative">
+            <!-- Desktop Timeline Line -->
             <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-accent hidden md:block"></div>
             
-            <div class="space-y-12">
+            <!-- Mobile Timeline Line -->
+            <div class="absolute left-6 md:hidden h-full w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
+            
+            <div class="space-y-8 md:space-y-12">
               <div *ngFor="let milestone of milestones; let i = index" 
-                   [class]="'flex items-center gap-8 ' + (i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse')">
-                <div [class]="'flex-1 ' + (i % 2 === 0 ? 'md:text-right' : 'md:text-left')">
-                  <app-card className="p-6 hover:shadow-elegant transition-all inline-block">
+                   class="relative flex items-start md:items-center gap-4 md:gap-8">
+                <!-- Mobile Timeline Dot -->
+                <div class="absolute left-0 md:hidden w-3 h-3 rounded-full bg-primary border-2 border-background z-10 mt-2"></div>
+                
+                <!-- Desktop Timeline Dot -->
+                <div class="hidden md:block w-4 h-4 rounded-full bg-primary border-4 border-background z-10 flex-shrink-0"></div>
+                
+                <!-- Card Container -->
+                <div [class]="'flex-1 w-full ' + (i % 2 === 0 ? 'md:text-right' : 'md:text-left')" [style.margin-left]="'md:0'">
+                  <app-card className="p-6 hover:shadow-elegant transition-all w-full md:inline-block ml-8 md:ml-0">
                     <h3 class="text-3xl font-bold gradient-text mb-2">
                       {{ milestone.year }}
                     </h3>
                     <p class="text-foreground font-medium">{{ milestone.event }}</p>
                   </app-card>
                 </div>
-                <div class="hidden md:block w-4 h-4 rounded-full bg-primary border-4 border-background z-10"></div>
-                <div class="flex-1"></div>
+                
+                <!-- Desktop Spacer -->
+                <div class="hidden md:block flex-1"></div>
               </div>
             </div>
           </div>
