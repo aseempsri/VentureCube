@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
   template: `
     <nav
       [class]="'fixed top-0 w-full z-50 transition-all duration-300 ' + (isScrolled ? 'bg-background/80 backdrop-blur-lg shadow-card' : 'bg-transparent')"
+      class="relative"
     >
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-20">
@@ -46,31 +47,51 @@ import { Subscription } from 'rxjs';
 
           <!-- Mobile Menu Button -->
           <button
-            class="md:hidden p-2 text-foreground"
+            class="md:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors relative z-50 flex items-center justify-center min-w-[44px] min-h-[44px]"
             (click)="toggleMenu()"
             type="button"
+            [attr.aria-label]="isOpen ? 'Close menu' : 'Open menu'"
+            [attr.aria-expanded]="isOpen"
           >
-            <app-icon *ngIf="!isOpen" [name]="'menu'" [size]="24"></app-icon>
-            <app-icon *ngIf="isOpen" [name]="'x'" [size]="24"></app-icon>
+            <span *ngIf="!isOpen" class="block">
+              <app-icon [name]="'menu'" [size]="24"></app-icon>
+            </span>
+            <span *ngIf="isOpen" class="block">
+              <app-icon [name]="'x'" [size]="24"></app-icon>
+            </span>
           </button>
         </div>
 
         <!-- Mobile Navigation -->
-        <div *ngIf="isOpen" class="md:hidden py-4 animate-fade-in">
-          <div class="flex flex-col gap-4">
-            <a
-              *ngFor="let link of navLinks"
-              [routerLink]="link.path"
-              (click)="closeMenu()"
-              [class]="'text-sm font-medium py-2 ' + (currentPath === link.path ? 'text-primary' : 'text-foreground')"
-            >
-              {{ link.name }}
-            </a>
-            <app-button className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
-              Get Started
-            </app-button>
+        <div 
+          *ngIf="isOpen" 
+          class="md:hidden fixed inset-x-0 top-20 bg-background/98 backdrop-blur-lg shadow-xl border-t border-border z-[100] animate-fade-in max-h-[calc(100vh-5rem)] overflow-y-auto"
+        >
+          <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col gap-2">
+              <a
+                *ngFor="let link of navLinks"
+                [routerLink]="link.path"
+                (click)="closeMenu()"
+                [class]="'text-base font-medium py-3 px-4 rounded-lg transition-colors block ' + (currentPath === link.path ? 'text-primary bg-primary/10' : 'text-foreground hover:bg-muted hover:text-primary')"
+              >
+                {{ link.name }}
+              </a>
+              <div class="pt-4 border-t border-border mt-2">
+                <app-button className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
+                  Get Started
+                </app-button>
+              </div>
+            </div>
           </div>
         </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div 
+          *ngIf="isOpen"
+          class="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-[90] top-20"
+          (click)="closeMenu()"
+        ></div>
       </div>
     </nav>
   `,
