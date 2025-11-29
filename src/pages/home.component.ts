@@ -54,7 +54,7 @@ import { IconComponent } from '../components/ui/icon.component';
                       [alt]="'Happy Client ' + (i + 1)"
                       class="w-full h-full object-cover"
                       loading="lazy"
-                      (error)="$event.target.style.display='none'"
+                      (error)="onImageError($event)"
                     />
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
                   </div>
@@ -327,13 +327,20 @@ export class HomeComponent implements OnInit {
   animateWords() {
     // Reset all words to invisible
     this.wordVisible = new Array(this.heroWords.length).fill(false);
-
+    
     // Animate words one by one
     this.heroWords.forEach((_, index) => {
       setTimeout(() => {
         this.wordVisible[index] = true;
       }, index * 150); // 150ms delay between each word
     });
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (img) {
+      img.style.display = 'none';
+    }
   }
 }
 
