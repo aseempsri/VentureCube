@@ -325,4 +325,167 @@ All colors MUST be HSL.
         box-shadow: 0 12px 40px -10px hsl(271 81% 56% / 0.3),
                     0 4px 16px -4px hsl(271 81% 56% / 0.2);
     }
+
+    /* Logo Animations */
+    .logo-container {
+        perspective: 1000px;
+    }
+
+    .logo-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .logo-bounce {
+        animation: logo-bounce 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px hsl(271 81% 56% / 0.4));
+    }
+
+    @keyframes logo-bounce {
+        0%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        50% {
+            transform: translateY(-15px) scale(1.02);
+        }
+    }
+
+    .logo-glow {
+        background: radial-gradient(
+            circle,
+            hsl(271 81% 56% / 0.4) 0%,
+            hsl(326 78% 68% / 0.3) 40%,
+            transparent 70%
+        );
+        border-radius: 50%;
+        width: 120%;
+        height: 120%;
+        top: -10%;
+        left: -10%;
+        animation: logo-glow-pulse 2s ease-in-out infinite;
+        filter: blur(20px);
+        z-index: 1;
+    }
+
+    @keyframes logo-glow-pulse {
+        0%, 100% {
+            opacity: 0.6;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    .logo-ring-1 {
+        animation: logo-ring-rotate 20s linear infinite;
+        border-style: dashed;
+    }
+
+    .logo-ring-2 {
+        animation: logo-ring-rotate 25s linear infinite reverse;
+        border-style: dotted;
+    }
+
+    @keyframes logo-ring-rotate {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 0.6;
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+            opacity: 0.3;
+        }
+    }
+
+    .logo-particle {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, hsl(271 81% 56%), hsl(326 78% 68%));
+        border-radius: 50%;
+        opacity: 0.6;
+        filter: blur(1px);
+        animation: logo-particle-float 8s ease-in-out infinite;
+    }
+
+    .logo-particle-1 {
+        top: 10%;
+        left: 20%;
+        animation-delay: 0s;
+    }
+
+    .logo-particle-2 {
+        top: 30%;
+        right: 15%;
+        animation-delay: 1.5s;
+    }
+
+    .logo-particle-3 {
+        bottom: 25%;
+        left: 25%;
+        animation-delay: 3s;
+    }
+
+    .logo-particle-4 {
+        bottom: 15%;
+        right: 30%;
+        animation-delay: 4.5s;
+    }
+
+    .logo-particle-5 {
+        top: 50%;
+        left: 10%;
+        animation-delay: 6s;
+    }
+
+    @keyframes logo-particle-float {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.4;
+        }
+        25% {
+            transform: translate(20px, -30px) scale(1.2);
+            opacity: 0.8;
+        }
+        50% {
+            transform: translate(-15px, -50px) scale(0.9);
+            opacity: 0.6;
+        }
+        75% {
+            transform: translate(30px, -20px) scale(1.1);
+            opacity: 0.7;
+        }
+    }
+
+    .logo-orb-1 {
+        animation: logo-orb-float 6s ease-in-out infinite;
+    }
+
+    .logo-orb-2 {
+        animation: logo-orb-float 8s ease-in-out infinite;
+    }
+
+    .logo-orb-3 {
+        animation: logo-orb-float 7s ease-in-out infinite;
+    }
+
+    @keyframes logo-orb-float {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.3;
+        }
+        33% {
+            transform: translate(30px, -30px) scale(1.1);
+            opacity: 0.4;
+        }
+        66% {
+            transform: translate(-20px, 20px) scale(0.9);
+            opacity: 0.35;
+        }
+    }
 }

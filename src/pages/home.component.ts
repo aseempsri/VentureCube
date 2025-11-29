@@ -15,7 +15,7 @@ import { IconComponent } from '../components/ui/icon.component';
       <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzMzZWEiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItaDJWMzZ6TTM0IDMydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-40"></div>
         
-        <div class="container mx-auto px-4 py-20 relative z-10">
+        <div class="container mx-auto px-4 pt-7 pb-20 relative z-10">
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div [class]="'space-y-6 ' + (isVisible ? 'animate-fade-in' : 'opacity-0')">
               <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm">
@@ -67,32 +67,34 @@ import { IconComponent } from '../components/ui/icon.component';
             </div>
             
             <div [class]="'relative ' + (isVisible ? 'animate-scale-in' : 'opacity-0')">
-              <div class="relative">
-                <div class="absolute -top-10 -right-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-                <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl animate-pulse" [style.animation-delay]="'1s'"></div>
-                <app-card className="p-8 backdrop-blur-sm bg-card/50 shadow-elegant border-2">
-                  <div class="space-y-6">
-                    <div class="flex items-center justify-between p-4 bg-muted rounded-lg">
-                      <div>
-                        <p class="text-sm text-muted-foreground">Portfolio Value</p>
-                        <p class="text-2xl font-bold gradient-text">₹45,67,890</p>
-                      </div>
-                      <div class="p-3 bg-green-100 rounded-full">
-                        <app-icon name="trending-up" [size]="24" class="text-green-600"></app-icon>
-                      </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                      <div class="p-4 bg-primary/10 rounded-lg">
-                        <p class="text-xs text-muted-foreground mb-1">Returns (1Y)</p>
-                        <p class="text-xl font-bold text-primary">+24.5%</p>
-                      </div>
-                      <div class="p-4 bg-secondary/10 rounded-lg">
-                        <p class="text-xs text-muted-foreground mb-1">SIP Active</p>
-                        <p class="text-xl font-bold text-secondary">12</p>
-                      </div>
-                    </div>
+              <div class="relative logo-container">
+                <!-- Animated background orbs -->
+                <div class="absolute -top-10 -right-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse logo-orb-1"></div>
+                <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl animate-pulse logo-orb-2" [style.animation-delay]="'1s'"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse logo-orb-3" [style.animation-delay]="'0.5s'"></div>
+                
+                <!-- Rotating rings around logo -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[26rem] h-[26rem] border-2 border-primary/20 rounded-full logo-ring-1"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[31.2rem] h-[31.2rem] border-2 border-secondary/20 rounded-full logo-ring-2"></div>
+                
+                <!-- Floating particles -->
+                <div class="logo-particle logo-particle-1"></div>
+                <div class="logo-particle logo-particle-2"></div>
+                <div class="logo-particle logo-particle-3"></div>
+                <div class="logo-particle logo-particle-4"></div>
+                <div class="logo-particle logo-particle-5"></div>
+                
+                <div class="flex items-center justify-center">
+                  <div class="relative logo-wrapper">
+                    <!-- Glow effect behind logo -->
+                    <div class="absolute inset-0 logo-glow"></div>
+                    <img 
+                      src="assets/venture-cube-logo.png" 
+                      alt="Venture Cube Logo" 
+                      class="w-[20.8rem] h-[20.8rem] object-contain logo-bounce relative z-10"
+                    />
                   </div>
-                </app-card>
+                </div>
               </div>
             </div>
           </div>
@@ -259,7 +261,7 @@ export class HomeComponent implements OnInit {
     { text: 'Confidence', isGradient: false }
   ];
   wordVisible: boolean[] = [];
-  
+
   clientAvatars = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces',
     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces',
@@ -329,7 +331,7 @@ export class HomeComponent implements OnInit {
   animateWords() {
     // Reset all words to invisible
     this.wordVisible = new Array(this.heroWords.length).fill(false);
-    
+
     // Animate words one by one
     this.heroWords.forEach((_, index) => {
       setTimeout(() => {
