@@ -47,7 +47,17 @@ import { IconComponent } from '../components/ui/icon.component';
               </div>
               <div class="flex items-center gap-8 pt-4">
                 <div class="flex -space-x-2">
-                  <div *ngFor="let i of [1,2,3,4]" class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary border-2 border-background"></div>
+                  <div *ngFor="let avatar of clientAvatars; let i = index" 
+                       class="w-10 h-10 rounded-full border-2 border-background overflow-hidden bg-gradient-to-br from-primary to-secondary relative shadow-sm">
+                    <img 
+                      [src]="avatar" 
+                      [alt]="'Happy Client ' + (i + 1)"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      (error)="$event.target.style.display='none'"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
+                  </div>
                 </div>
                 <div>
                   <p class="text-sm font-semibold text-foreground">5000+ Happy Clients</p>
@@ -249,6 +259,13 @@ export class HomeComponent implements OnInit {
     { text: 'Confidence', isGradient: false }
   ];
   wordVisible: boolean[] = [];
+  
+  clientAvatars = [
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=b6e3ff,c0aede,d1d4f9',
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&backgroundColor=ffd5dc,ffdfbf,d1d4f9',
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael&backgroundColor=c0aede,ffd5dc,b6e3ff',
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma&backgroundColor=ffdfbf,b6e3ff,c0aede'
+  ];
 
   services = [
     {
