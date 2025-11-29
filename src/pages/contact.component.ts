@@ -45,44 +45,61 @@ import { ToastService } from '../services/toast.service';
           </div>
 
           <div class="grid lg:grid-cols-2 gap-12">
-            <!-- Contact Form -->
-            <app-card className="p-8 shadow-elegant border-2">
-              <h2 class="text-3xl font-bold mb-6">Send us a Message</h2>
-              <form (ngSubmit)="handleSubmit($event)" class="space-y-6">
-                <div>
-                  <label class="block text-sm font-medium mb-2">Full Name</label>
-                  <app-input name="name" [(ngModel)]="formData.name" placeholder="John Doe" [required]="true" className="border-2"></app-input>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-4">
+            <!-- Left Column: Form and Consultation Card -->
+            <div class="space-y-6">
+              <!-- Contact Form -->
+              <app-card className="p-8 shadow-elegant border-2">
+                <h2 class="text-3xl font-bold mb-6">Send us a Message</h2>
+                <form (ngSubmit)="handleSubmit($event)" class="space-y-6">
                   <div>
-                    <label class="block text-sm font-medium mb-2">Email</label>
-                    <app-input name="email" type="email" [(ngModel)]="formData.email" placeholder="john@example.com" [required]="true" className="border-2"></app-input>
+                    <label class="block text-sm font-medium mb-2">Full Name</label>
+                    <app-input name="name" [(ngModel)]="formData.name" placeholder="John Doe" [required]="true" className="border-2"></app-input>
                   </div>
+
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium mb-2">Email</label>
+                      <app-input name="email" type="email" [(ngModel)]="formData.email" placeholder="john@example.com" [required]="true" className="border-2"></app-input>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium mb-2">Phone</label>
+                      <app-input name="phone" type="tel" [(ngModel)]="formData.phone" placeholder="+91 98765 43210" [required]="true" className="border-2"></app-input>
+                    </div>
+                  </div>
+
                   <div>
-                    <label class="block text-sm font-medium mb-2">Phone</label>
-                    <app-input name="phone" type="tel" [(ngModel)]="formData.phone" placeholder="+91 98765 43210" [required]="true" className="border-2"></app-input>
+                    <label class="block text-sm font-medium mb-2">Subject</label>
+                    <app-input name="subject" [(ngModel)]="formData.subject" placeholder="How can we help you?" [required]="true" className="border-2"></app-input>
                   </div>
-                </div>
 
-                <div>
-                  <label class="block text-sm font-medium mb-2">Subject</label>
-                  <app-input name="subject" [(ngModel)]="formData.subject" placeholder="How can we help you?" [required]="true" className="border-2"></app-input>
-                </div>
+                  <div>
+                    <label class="block text-sm font-medium mb-2">Message</label>
+                    <app-textarea name="message" [(ngModel)]="formData.message" placeholder="Tell us more about your financial goals..." [rows]="6" [required]="true" className="border-2"></app-textarea>
+                  </div>
 
-                <div>
-                  <label class="block text-sm font-medium mb-2">Message</label>
-                  <app-textarea name="message" [(ngModel)]="formData.message" placeholder="Tell us more about your financial goals..." [rows]="6" [required]="true" className="border-2"></app-textarea>
-                </div>
+                  <app-button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant">
+                    Send Message
+                    <app-icon name="send" [size]="16" class="ml-2"></app-icon>
+                  </app-button>
+                </form>
+              </app-card>
 
-                <app-button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant">
-                  Send Message
-                  <app-icon name="send" [size]="16" class="ml-2"></app-icon>
+              <!-- Schedule a Free Consultation Card -->
+              <app-card className="p-8 bg-gradient-to-br from-primary via-secondary to-accent border-2 border-primary shadow-elegant">
+                <h3 class="text-2xl font-bold text-white mb-4">
+                  Schedule a Free Consultation
+                </h3>
+                <p class="text-white/90 mb-6">
+                  Not sure where to start? Book a free 30-minute consultation with our 
+                  financial experts to discuss your goals.
+                </p>
+                <app-button size="lg" className="w-full bg-white text-primary hover:bg-white/90 shadow-lg">
+                  Book Appointment
                 </app-button>
-              </form>
-            </app-card>
+              </app-card>
+            </div>
 
-            <!-- Map & Additional Info -->
+            <!-- Right Column: Map & Additional Info -->
             <div class="space-y-6">
               <app-card className="p-8 border-2">
                 <h2 class="text-3xl font-bold mb-6">Visit Our Office</h2>
@@ -102,19 +119,6 @@ import { ToastService } from '../services/toast.service';
                     </div>
                   </div>
                 </div>
-              </app-card>
-
-              <app-card className="p-8 bg-gradient-to-br from-primary via-secondary to-accent border-2 border-primary">
-                <h3 class="text-2xl font-bold text-white mb-4">
-                  Schedule a Free Consultation
-                </h3>
-                <p class="text-white/90 mb-6">
-                  Not sure where to start? Book a free 30-minute consultation with our 
-                  financial experts to discuss your goals.
-                </p>
-                <app-button size="lg" className="w-full bg-white text-primary hover:bg-white/90">
-                  Book Appointment
-                </app-button>
               </app-card>
 
               <app-card className="p-8 border-2">
