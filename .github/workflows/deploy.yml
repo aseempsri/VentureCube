@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build -- --base-href=/VentureCube/ --configuration=production
+        run: npm run build --configuration=production
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
 
