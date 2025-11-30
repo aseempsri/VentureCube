@@ -82,11 +82,11 @@ import { IconComponent } from './ui/icon.component';
             <ul class="space-y-3">
               <li class="flex items-start gap-2 text-sm text-muted-foreground">
                 <app-icon name="map-pin" [size]="18" class="flex-shrink-0 mt-0.5"></app-icon>
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Mumbai, Maharashtra 410221</span>
               </li>
               <li class="flex items-center gap-2 text-sm text-muted-foreground">
                 <app-icon name="phone" [size]="18" class="flex-shrink-0"></app-icon>
-                <span>+91 98765 43210</span>
+                <span>+91 98154 61615</span>
               </li>
               <li class="flex items-center gap-2 text-sm text-muted-foreground">
                 <app-icon name="mail" [size]="18" class="flex-shrink-0"></app-icon>
@@ -118,6 +118,6 @@ import { IconComponent } from './ui/icon.component';
 export class FooterComponent {
   logoPath = 'assets/venture-cube-logo.png';
   currentYear = new Date().getFullYear();
-  email = 'info@venturecube.com';
+  email = 'info@venturecube.in';
 }
 

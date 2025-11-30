@@ -82,8 +82,11 @@ import { IconComponent } from '../components/ui/icon.component';
       </section>
 
       <!-- Journey/Timeline -->
-      <section class="py-20">
-        <div class="container mx-auto px-4">
+      <section class="py-20 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzMzZWEiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItaDJWMzZ6TTM0IDMydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
           <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
               Our <span class="gradient-text">Journey</span>
@@ -93,29 +96,39 @@ import { IconComponent } from '../components/ui/icon.component';
             </p>
           </div>
 
-          <div class="relative">
-            <!-- Desktop Timeline Line -->
-            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-accent hidden md:block"></div>
+          <div class="relative max-w-5xl mx-auto">
+            <!-- Desktop Timeline Line with animated gradient -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-accent hidden md:block timeline-line"></div>
             
             <!-- Mobile Timeline Line -->
-            <div class="absolute left-6 md:hidden h-full w-0.5 bg-gradient-to-b from-primary via-secondary to-accent"></div>
+            <div class="absolute left-6 md:hidden h-full w-0.5 bg-gradient-to-b from-primary via-secondary to-accent timeline-line"></div>
             
-            <div class="space-y-8 md:space-y-12">
+            <div class="space-y-8 md:space-y-16">
               <div *ngFor="let milestone of milestones; let i = index" 
-                   class="relative flex items-start md:items-center gap-4 md:gap-8">
+                   class="relative flex items-start md:items-center gap-4 md:gap-8 milestone-item"
+                   [style.animation-delay]="(i * 0.15) + 's'">
                 <!-- Mobile Timeline Dot -->
-                <div class="absolute left-0 md:hidden w-3 h-3 rounded-full bg-primary border-2 border-background z-10 mt-2"></div>
+                <div class="absolute left-0 md:hidden w-4 h-4 rounded-full bg-gradient-to-br from-primary to-secondary border-4 border-background z-10 mt-1.5 shadow-lg shadow-primary/50 timeline-dot" [style.animation-delay]="(i * 0.15 + 0.1) + 's'"></div>
                 
-                <!-- Desktop Timeline Dot -->
-                <div class="hidden md:block w-4 h-4 rounded-full bg-primary border-4 border-background z-10 flex-shrink-0"></div>
+                <!-- Desktop Timeline Dot with pulse animation -->
+                <div class="hidden md:block w-6 h-6 rounded-full bg-gradient-to-br from-primary to-secondary border-4 border-background z-10 flex-shrink-0 shadow-lg shadow-primary/50 timeline-dot relative" [style.animation-delay]="(i * 0.15 + 0.1) + 's'">
+                  <div class="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" [style.animation-delay]="(i * 0.15 + 0.5) + 's'"></div>
+                </div>
                 
                 <!-- Card Container -->
-                <div [class]="'flex-1 w-full ' + (i % 2 === 0 ? 'md:text-right' : 'md:text-left')" [style.margin-left]="'md:0'">
-                  <app-card className="p-6 hover:shadow-elegant transition-all w-full md:inline-block ml-8 md:ml-0">
-                    <h3 class="text-3xl font-bold gradient-text mb-2">
-                      {{ milestone.year }}
-                    </h3>
-                    <p class="text-foreground font-medium">{{ milestone.event }}</p>
+                <div [class]="'flex-1 w-full ' + (i % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8')" [style.margin-left]="'md:0'">
+                  <app-card [class]="'p-6 md:p-8 hover:shadow-elegant transition-all duration-500 w-full md:inline-block ml-8 md:ml-0 milestone-card group border-2 border-border/60 hover:border-primary bg-gradient-to-br from-card via-card to-muted/20 backdrop-blur-sm'">
+                    <!-- Animated background gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+                    
+                    <div class="relative z-10">
+                      <h3 class="text-3xl md:text-4xl font-bold gradient-text mb-3 group-hover:scale-105 transition-transform duration-300 inline-block">
+                        {{ milestone.year }}
+                      </h3>
+                      <p class="text-foreground font-semibold text-lg md:text-xl group-hover:text-primary transition-colors duration-300">
+                        {{ milestone.event }}
+                      </p>
+                    </div>
                   </app-card>
                 </div>
                 
@@ -221,16 +234,16 @@ export class AboutComponent {
   ];
 
   milestones = [
-    { year: '2008', event: 'Company Founded' },
-    { year: '2012', event: 'SEBI Registration Achieved' },
-    { year: '2015', event: 'Crossed ₹100 Cr AUM' },
+    { year: '2008', event: 'Company founded' },
+    { year: '2012', event: 'Certifications Achieved' },
+    { year: '2015', event: 'Crossed Rs. 30 Cr AUM' },
     { year: '2018', event: 'Expanded to 5 Cities' },
-    { year: '2020', event: '5000+ Clients Milestone' },
-    { year: '2023', event: '₹500 Cr+ AUM' },
+    { year: '2020', event: '3500+ Clients Milestone' },
+    { year: '2025', event: 'Rs. 500 Cr+ AUM' },
   ];
 
   achievements = [
-    'SEBI Registered Investment Advisor',
+    'Certified Investment Advisor',
     'ISO 9001:2015 Certified',
     'Member of Association of Mutual Funds in India (AMFI)',
     'Best Financial Advisory Firm 2023 - India Finance Awards',
@@ -239,7 +252,7 @@ export class AboutComponent {
   ];
 
   trustItems = [
-    { title: 'Expert Team', desc: 'SEBI registered advisors with 15+ years of combined experience in financial markets' },
+    { title: 'Expert Team', desc: 'Registered advisors with 15+ years of combined experience in financial markets' },
     { title: 'Personalized Approach', desc: 'Custom financial plans tailored to your unique goals, risk profile, and life stage' },
     { title: 'Transparent Process', desc: 'Clear communication, no hidden charges, complete visibility into your investments' },
     { title: 'Ongoing Support', desc: 'Regular portfolio reviews, market updates, and 24/7 customer support' },

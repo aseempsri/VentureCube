@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../components/ui/button.component';
@@ -27,6 +27,48 @@ import { ToastService } from '../services/toast.service';
       
       .card-column > app-card:first-child {
         flex: 1;
+      }
+    }
+
+    /* Modal Animations */
+    .modal-overlay {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+      animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateY(0);
+      }
+    }
+
+    .phone-number {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
       }
     }
   `],
@@ -81,7 +123,7 @@ import { ToastService } from '../services/toast.service';
                     </div>
                     <div>
                       <label class="block text-sm font-medium mb-2">Phone</label>
-                      <app-input name="phone" type="tel" [(ngModel)]="formData.phone" placeholder="+91 98765 43210" [required]="true" className="border-2"></app-input>
+                      <app-input name="phone" type="tel" [(ngModel)]="formData.phone" placeholder="+91 98154 61615" [required]="true" className="border-2"></app-input>
                     </div>
                   </div>
 
@@ -111,7 +153,7 @@ import { ToastService } from '../services/toast.service';
                   Not sure where to start? Book a free 30-minute consultation with our 
                   financial experts to discuss your goals.
                 </p>
-                <app-button size="lg" className="w-full bg-white text-primary hover:bg-white/90 shadow-lg">
+                <app-button size="lg" className="w-full bg-white text-primary hover:bg-white/90 shadow-lg" (click)="openModal()">
                   Book Appointment
                 </app-button>
               </app-card>
@@ -130,9 +172,7 @@ import { ToastService } from '../services/toast.service';
                     <div>
                       <p class="font-semibold">Head Office</p>
                       <p class="text-sm text-muted-foreground">
-                        123 Business Tower, Nariman Point<br />
-                        Mumbai, Maharashtra 400001<br />
-                        India
+                        Mumbai, Maharashtra 410221
                       </p>
                     </div>
                   </div>
@@ -171,9 +211,71 @@ import { ToastService } from '../services/toast.service';
         </div>
       </section>
     </div>
+
+    <!-- Appointment Modal -->
+    <div *ngIf="isModalOpen" 
+         class="fixed inset-0 z-50 flex items-center justify-center modal-overlay"
+         (click)="closeModal()">
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" (click)="closeModal()"></div>
+      <div class="relative z-10 w-full max-w-md mx-4 modal-content" (click)="$event.stopPropagation()">
+        <app-card className="p-8 md:p-10 bg-gradient-to-br from-card via-card to-muted/30 border-2 border-primary/20 shadow-elegant relative overflow-hidden">
+          <!-- Background decoration -->
+          <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzMzZWEiPjxwYXRoIGQ9Ik0zNiAzNHYyaDJWMzZ6TTM0IDMydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+          
+          <!-- Close button -->
+          <button 
+            (click)="closeModal()"
+            class="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 z-10">
+            <app-icon name="x" [size]="18"></app-icon>
+          </button>
+
+          <!-- Content -->
+          <div class="relative z-10 text-center space-y-6">
+            <!-- Icon -->
+            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center mx-auto shadow-lg shadow-primary/30 animate-pulse">
+              <app-icon name="phone" [size]="40" class="text-white"></app-icon>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="text-3xl md:text-4xl font-bold gradient-text">
+              Connect with Us
+            </h2>
+
+            <!-- Message -->
+            <p class="text-lg text-muted-foreground">
+              Give us a call to schedule your free consultation
+            </p>
+
+            <!-- Phone Number -->
+            <div class="pt-4">
+              <a 
+                href="tel:+919815461615" 
+                class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-primary via-secondary to-accent text-white rounded-xl font-bold text-xl md:text-2xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:scale-105 phone-number">
+                <app-icon name="phone" [size]="24" class="text-white"></app-icon>
+                <span>+91 98154 61615</span>
+              </a>
+            </div>
+
+            <!-- Additional info -->
+            <p class="text-sm text-muted-foreground pt-2">
+              Available Mon - Sat, 9:00 AM - 6:00 PM
+            </p>
+          </div>
+        </app-card>
+      </div>
+    </div>
   `,
 })
-export class ContactComponent {
+export class ContactComponent implements OnDestroy {
+  isModalOpen = false;
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEscapeKey(event: KeyboardEvent) {
+    if (this.isModalOpen) {
+      this.closeModal();
+    }
+  }
+
   formData = {
     name: '',
     email: '',
@@ -183,14 +285,14 @@ export class ContactComponent {
   };
 
   contactInfo = [
-    { icon: 'phone', title: 'Phone', details: ['+91 98765 43210', '+91 98765 43211'], color: 'from-primary to-secondary' },
-    { icon: 'mail', title: 'Email', details: ['info@venturecube.com', 'support@venturecube.com'], color: 'from-secondary to-accent' },
-    { icon: 'map-pin', title: 'Office', details: ['123 Business Tower', 'Mumbai, Maharashtra 400001'], color: 'from-accent to-primary' },
+    { icon: 'phone', title: 'Phone', details: ['+91 98154 61615'], color: 'from-primary to-secondary' },
+    { icon: 'mail', title: 'Email', details: ['info@venturecube.in'], color: 'from-secondary to-accent' },
+    { icon: 'map-pin', title: 'Office', details: ['Mumbai, Maharashtra 410221'], color: 'from-accent to-primary' },
     { icon: 'clock', title: 'Working Hours', details: ['Mon - Fri: 9:00 AM - 6:00 PM', 'Sat: 10:00 AM - 2:00 PM'], color: 'from-primary to-secondary' },
   ];
 
   whyChooseItems = [
-    'SEBI Registered Advisors',
+    'Registered Advisors',
     '15+ Years of Experience',
     'Transparent Fee Structure',
     'Personalized Financial Plans',
@@ -210,6 +312,21 @@ export class ContactComponent {
     event.preventDefault();
     this.toastService.show('Message Sent!', 'We\'ll get back to you within 24 hours.');
     this.formData = { name: '', email: '', phone: '', subject: '', message: '' };
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  ngOnDestroy() {
+    // Restore body scroll when component is destroyed
+    document.body.style.overflow = '';
   }
 }
 

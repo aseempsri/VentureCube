@@ -19,7 +19,7 @@ import { IconComponent } from '../components/ui/icon.component';
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div [class]="'space-y-6 ' + (isVisible ? 'animate-fade-in' : 'opacity-0')">
               <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm">
-                SEBI Registered Financial Advisors
+                India's Most Trusted Wealth Partners
               </div>
               <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
                 <span *ngFor="let word of heroWords; let i = index" 
@@ -91,7 +91,7 @@ import { IconComponent } from '../components/ui/icon.component';
                     <img 
                       src="assets/venture-cube-logo.png" 
                       alt="Venture Cube Logo" 
-                      class="w-[20.8rem] h-[20.8rem] object-contain logo-bounce relative z-10"
+                      class="w-[27rem] h-[27rem] object-contain logo-bounce relative z-10"
                     />
                   </div>
                 </div>
@@ -211,7 +211,7 @@ import { IconComponent } from '../components/ui/icon.component';
               <app-card className="p-6 text-center hover:shadow-elegant transition-all mt-8">
                 <app-icon name="users" [size]="48" class="mx-auto mb-4 text-secondary"></app-icon>
                 <h3 class="font-bold text-2xl mb-2">Expert Team</h3>
-                <p class="text-sm text-muted-foreground">SEBI certified advisors</p>
+                <p class="text-sm text-muted-foreground">Certified advisors</p>
               </app-card>
               <app-card className="p-6 text-center hover:shadow-elegant transition-all">
                 <app-icon name="award" [size]="48" class="mx-auto mb-4 text-accent"></app-icon>
@@ -312,7 +312,6 @@ export class HomeComponent implements OnInit {
   ];
 
   features = [
-    'SEBI Registered Financial Advisors',
     'Transparent Fee Structure',
     'Personalized Financial Plans',
     'Regular Portfolio Reviews',
