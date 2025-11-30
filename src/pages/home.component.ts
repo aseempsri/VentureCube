@@ -136,10 +136,10 @@ import { IconComponent } from '../components/ui/icon.component';
                 className="relative p-6 group cursor-pointer border-2 border-border/60 hover:border-primary overflow-hidden bg-gradient-to-br from-card via-card to-muted/30 h-full transition-all duration-500 backdrop-blur-sm"
               >
                 <!-- Background pattern -->
-                <div class="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzMzZWEiPjxwYXRoIGQ9Ik0zNiAzNHYyaDJWMzZ6TTM0IDMydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+                <div class="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzMzZWEiPjxwYXRoIGQ9Ik0zNiAzNHYyaDJWMzZ6TTM0IDMydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] pointer-events-none"></div>
                 
                 <!-- Subtle gradient overlay -->
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50 pointer-events-none"></div>
                 
                 <!-- Glow effect -->
                 <div class="service-card-glow"></div>
@@ -162,9 +162,11 @@ import { IconComponent } from '../components/ui/icon.component';
                   </p>
                   
                   <!-- Arrow indicator -->
-                  <div class="mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300">
-                    <span class="text-sm font-semibold">Learn more</span>
-                    <app-icon name="arrow-right" [size]="16" class="ml-2"></app-icon>
+                  <div class="mt-4 flex justify-end">
+                    <a routerLink="/contact" class="flex items-center text-primary opacity-60 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-300 cursor-pointer hover:underline relative z-20 inline-block">
+                      <span class="text-sm font-semibold">Learn more</span>
+                      <app-icon name="arrow-right" [size]="16" class="ml-2"></app-icon>
+                    </a>
                   </div>
                 </div>
               </app-card>
@@ -345,5 +347,6 @@ export class HomeComponent implements OnInit {
       img.style.display = 'none';
     }
   }
+
 }
 
