@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs';
               alt="Venture Cube"
               class="h-12 w-12 transition-transform duration-300 group-hover:scale-110"
             />
-            <span class="text-2xl font-extrabold gradient-text">
+            <span class="text-2xl brand-font gradient-text">
               Venture Cube
             </span>
           </a>

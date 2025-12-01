@@ -15,7 +15,7 @@ import { IconComponent } from './ui/icon.component';
           <div>
             <a routerLink="/" class="flex items-center gap-3 mb-4">
               <img [src]="logoPath" alt="Venture Cube" class="h-10 w-10" />
-              <span class="text-xl font-extrabold gradient-text">Venture Cube</span>
+              <span class="text-xl brand-font gradient-text">Venture Cube</span>
             </a>
             <p class="text-sm text-muted-foreground mb-4">
               Your trusted partner for comprehensive financial consultancy services in India. 
